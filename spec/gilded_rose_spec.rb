@@ -48,6 +48,17 @@ describe GildedRose do
       expect(item.quality).to eq 2
     end
 
+    it "can check whether product is still in date" do
+      item = Item.new("foo", 0, 0)
+      rose = GildedRose.new(item)
+      expect(rose.in_date?(item)).to eq true
+    end
+
+    it "can check whether a product is out of date" do
+      item = Item.new("foo", -2, 0)
+      rose = GildedRose.new(item)
+      expect(rose.in_date?(item)).to eq false
+    end
   end
 
 end

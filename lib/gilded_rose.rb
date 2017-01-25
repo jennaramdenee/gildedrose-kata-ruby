@@ -3,6 +3,7 @@ class GildedRose
   QUALITY_REDUCTION = 1
   SELL_IN_REDUCTION = 1
   MAX_QUALITY = 50
+  MIN_QUALITY = 0
 
   def initialize(items)
     @items = items
@@ -28,7 +29,7 @@ class GildedRose
       if !negative_quality?(item, -QUALITY_REDUCTION)
         update_quality2(item, -QUALITY_REDUCTION)
       else
-        set_quality(item, 0)
+        set_quality(item, MIN_QUALITY)
       end
     else
       update_quality2(item, -(QUALITY_REDUCTION*2))
@@ -53,7 +54,7 @@ class GildedRose
       end
 
     else
-      set_quality(item, 0)
+      set_quality(item, MIN_QUALITY)
     end
   end
 

@@ -6,49 +6,58 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if !negative_quality?(item, -1)
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            update_quality2(item, -1)
+
+      if in_date?(item)
+
+        if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
+
+          if !negative_quality?(item, -1)
+            if item.name != "Sulfuras, Hand of Ragnaros"
+              update_quality2(item, -1)
+            end
+
           end
+
+        else
+
+            #All about backstage
+            if item.name == "Backstage passes to a TAFKAL80ETC concert"
+              if item.sell_in < 11
+
+                if !over_quality?(item)
+                  update_quality2(item, 1)
+                end
+
+              end
+
+              if item.sell_in < 6
+                if item.quality < 50
+                  update_quality2(item, 1)
+                end
+              end
+
+            end
+
         end
       else
-        if item.quality < 50
-          update_quality2(item, 1)
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                update_quality2(item, 1)
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                update_quality2(item, 1)
-              end
-            end
-          end
-        end
+        update_quality2(item, -2)
       end
+
+      #Exceptions
       if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
+        update_sell_in(item)
       end
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                update_quality2(item, -1)
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
-        else
-          if item.quality < 50
-            update_quality2(item, -1)
-          end
-        end
-      end
+      #
+      #
+      #   # if item.name != "Aged Brie"
+      #   #   set_quality(item, 0)
+      #   # else
+      #     #All about brie
+      #     if item.quality < 50
+      #       update_quality2(item, -1)
+      #     end
+      #   # end
+      # end
     end
 
 
@@ -67,11 +76,15 @@ class GildedRose
   end
 
   def in_date?(item)
-    item.sell_in >= 0
+    item.sell_in > 0
   end
 
   def update_sell_in(item)
     item.sell_in -= 1
+  end
+
+  def set_quality(item, value)
+    item.quality = value
   end
 
 end

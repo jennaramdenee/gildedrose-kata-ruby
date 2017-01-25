@@ -62,6 +62,10 @@ class GildedRose
     item.quality + value > 50
   end
 
+  def update_quality2(item, value)
+    item.quality += value
+  end
+
 end
 
 class Item

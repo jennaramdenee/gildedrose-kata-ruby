@@ -34,6 +34,20 @@ describe GildedRose do
       expect(rose.over_quality?(item, 50)).to eq true
     end
 
+    it "can amend quality for an item by a given positive value" do
+      item = Item.new("foo", 0, 1)
+      rose = GildedRose.new(item)
+      rose.update_quality2(item, 4)
+      expect(item.quality).to eq 5
+    end
+
+    it "can amend quality for an item by a given negative value" do
+      item = Item.new("foo", 0, 5)
+      rose = GildedRose.new(item)
+      rose.update_quality2(item, -3)
+      expect(item.quality).to eq 2
+    end
+
   end
 
 end

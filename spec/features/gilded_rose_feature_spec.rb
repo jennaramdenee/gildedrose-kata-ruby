@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '../../lib/gilded_rose')
 
 describe GildedRose do
 
-  describe "Happy scenarios" do
+  describe "Simple scenarios" do
 
     it "reduces quality by 1 for a product that is still in date" do
       item = Item.new("foo", 5, 5)
@@ -52,6 +52,17 @@ describe GildedRose do
       items = [item]
       GildedRose.new(items).update_quality()
       expect(item.sell_in).to eq 0
+    end
+
+  end
+
+  describe "Quality cannot fall below 0" do
+
+    it "never reduces quality below 0" do
+      item = Item.new("foo", 1, 0)
+      items = [item]
+      GildedRose.new(items).update_quality()
+      expect(item.quality).to eq 0
     end
 
   end

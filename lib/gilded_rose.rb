@@ -9,7 +9,6 @@ class GildedRose
       if item.name != "Sulfuras, Hand of Ragnaros"
 
         if in_date?(item)
-
           if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
 
             if !negative_quality?(item, -1)
@@ -17,6 +16,8 @@ class GildedRose
                 update_quality2(item, -1)
               end
 
+            else
+              set_quality(item, 0)
             end
 
           else

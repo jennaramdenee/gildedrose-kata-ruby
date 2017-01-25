@@ -17,8 +17,8 @@ class GildedRose
         calculate_brie_quality(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         calculate_backstage_passes_quality(item)
-      elsif item.name == "Conjured"
-        calculate_conjured_quality
+      elsif item.name.include?("Conjured")
+        calculate_conjured_quality(item)
       else
         calculate_non_exceptions_quality(item)
       end

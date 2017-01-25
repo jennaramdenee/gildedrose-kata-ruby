@@ -49,11 +49,7 @@ class GildedRose
   end
 
   def calculate_brie_quality(item)
-    if !over_quality?(item, QUALITY_REDUCTION)
-      update_quality2(item, QUALITY_REDUCTION)
-    else
-      set_quality(item, MAX_QUALITY)
-    end
+    update_quality2(item, QUALITY_REDUCTION)
   end
 
   def negative_quality?(item, value)

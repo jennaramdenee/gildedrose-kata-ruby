@@ -31,15 +31,4 @@ describe GildedRose do
 
   end
 
-  describe "Quality cannot fall below 0" do
-
-    it "never reduces quality below 0" do
-      item = Item.new("foo", 1, 0)
-      items = [item]
-      GildedRose.new(items).update_quality()
-      expect(item.quality).to eq 0
-    end
-
-  end
-
 end

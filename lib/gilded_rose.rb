@@ -75,7 +75,11 @@ class GildedRose
   end
 
   def update_quality2(item, value)
-    item.quality += value
+    if value > 0
+      !over_quality?(item, value) ? item.quality += value : set_quality(item, MAX_QUALITY)
+    else
+      !negative_quality?(item, value) ? item.quality += value : set_quality(item, MIN_QUALITY)
+    end
   end
 
   def in_date?(item)

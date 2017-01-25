@@ -80,6 +80,13 @@ describe GildedRose do
       expect(item.quality).to eq 2
     end
 
+    it "never reduces quality below 0" do
+      item = Item.new("foo", 1, 0)
+      rose = GildedRose.new(item)
+      rose.update_quality2(item, -3)
+      expect(item.quality).to eq 0
+    end
+
   end
 
   describe "#in_date?" do

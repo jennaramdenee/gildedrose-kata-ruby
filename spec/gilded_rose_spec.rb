@@ -118,4 +118,30 @@ describe GildedRose do
 
   end
 
+  describe "#calculate_backstage_passes" do
+
+    it "increases quality by 2 if there are 9 days until sell_in date" do
+      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 9, 40)
+      rose = GildedRose.new(item)
+      rose.calculate_backstage_passes(item)
+      expect(item.quality).to eq 42
+    end
+
+    it "increases quality by 3 if there are 4 days until sell_in date" do
+      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 30)
+      rose = GildedRose.new(item)
+      rose.calculate_backstage_passes(item)
+      expect(item.quality).to eq 33
+    end
+
+    it "sets quality to 0 after the concert" do
+      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 30)
+      rose = GildedRose.new(item)
+      rose.calculate_backstage_passes(item)
+      expect(item.quality).to eq 0
+    end
+
+
+  end
+
 end

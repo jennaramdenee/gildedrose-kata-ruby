@@ -31,24 +31,9 @@ class GildedRose
 
             #Backstage
             if item.name == "Backstage passes to a TAFKAL80ETC concert"
-
-              if in_date?(item)
-                if item.sell_in < 6
-                  if !over_quality?(item, 3)
-                    update_quality2(item, 3)
-                  end
-
-                else item.sell_in < 11
-                  if !over_quality?(item, 2)
-                    update_quality2(item, 2)
-                  end
-                end
-
-              else
-                set_quality(item, 0)
-              end
-
+              calculate_backstage_passes(item)
             end
+
           end
 
       update_sell_in(item)
@@ -57,6 +42,24 @@ class GildedRose
     end
 
 
+  end
+
+  def calculate_backstage_passes(item)
+    if in_date?(item)
+      if item.sell_in < 6
+        if !over_quality?(item, 3)
+          update_quality2(item, 3)
+        end
+
+      else item.sell_in < 11
+        if !over_quality?(item, 2)
+          update_quality2(item, 2)
+        end
+      end
+
+    else
+      set_quality(item, 0)
+    end
   end
 
   def calculate_brie(item)

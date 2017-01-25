@@ -6,21 +6,17 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-
       if item.name == "Sulfuras, Hand of Ragnaros"
         break
       elsif item.name == "Aged Brie"
         calculate_brie_quality(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         calculate_backstage_passes_quality(item)
-      elsif item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert"
+      else 
         calculate_non_exceptions_quality(item)
       end
-
       update_sell_in(item)
-
     end
-
   end
 
   def calculate_non_exceptions_quality(item)

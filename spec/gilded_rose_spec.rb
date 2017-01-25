@@ -22,11 +22,11 @@ describe GildedRose do
 
   end
 
-  describe "#update_quality" do
+  describe "#calculate_quality" do
 
     it "does not change the name" do
       items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
+      GildedRose.new(items).calculate_quality()
       expect(items[0].name).to eq "foo"
     end
 
@@ -189,8 +189,8 @@ describe GildedRose do
 
     it "reduces quality by 2 for a product that is out of date" do
       item = Item.new("foo", 0, 5)
-      items = [item]
-      GildedRose.new(items).update_quality()
+      rose = GildedRose.new(item)
+      rose.calculate_non_exceptions_quality(item)
       expect(item.quality).to eq 3
     end
 

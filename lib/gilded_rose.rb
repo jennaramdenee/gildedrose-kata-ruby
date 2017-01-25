@@ -9,7 +9,7 @@ class GildedRose
     @items = items
   end
 
-  def update_quality()
+  def calculate_quality()
     @items.each do |item|
       if item.name == "Sulfuras, Hand of Ragnaros"
         break

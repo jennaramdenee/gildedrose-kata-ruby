@@ -67,7 +67,11 @@ class GildedRose
   end
 
   def in_date?(item)
-    item.sell_in >= 0 
+    item.sell_in >= 0
+  end
+
+  def update_sell_in(item)
+    item.sell_in -= 1
   end
 
 end

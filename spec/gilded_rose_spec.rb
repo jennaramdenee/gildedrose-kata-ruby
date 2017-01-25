@@ -59,6 +59,14 @@ describe GildedRose do
       rose = GildedRose.new(item)
       expect(rose.in_date?(item)).to eq false
     end
+
+    it "can amend sell by date for an item" do
+      item = Item.new("foo", 3, 0)
+      rose = GildedRose.new(item)
+      rose.update_sell_in(item)
+      expect(item.sell_in).to eq 2
+    end
+
   end
 
 end

@@ -13,13 +13,25 @@ describe GildedRose do
     it "returns true when quality will be reduced below zero" do
       item = Item.new("foo", 0, 0)
       rose = GildedRose.new(item)
-      expect(rose.negative_quality?(item, 1)).to eq true
+      expect(rose.negative_quality?(item, -1)).to eq true
     end
 
     it "returns false when quality will not be reduced below zero" do
       item = Item.new("foo", 0, 3)
       rose = GildedRose.new(item)
-      expect(rose.negative_quality?(item, 1)).to eq false
+      expect(rose.negative_quality?(item, -1)).to eq false
+    end
+
+    it "returns true when quality will be increased above fifty" do
+      item = Item.new("foo", 0, 0)
+      rose = GildedRose.new(item)
+      expect(rose.over_quality?(item, 49)).to eq false
+    end
+
+    it "returns false when quality will not be increased above fifty" do
+      item = Item.new("foo", 0, 1)
+      rose = GildedRose.new(item)
+      expect(rose.over_quality?(item, 50)).to eq true
     end
 
   end

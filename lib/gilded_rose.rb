@@ -55,7 +55,11 @@ class GildedRose
   end
 
   def negative_quality?(item, value)
-    item.quality - value < 0
+    item.quality + value < 0
+  end
+
+  def over_quality?(item, value)
+    item.quality + value > 50
   end
 
 end

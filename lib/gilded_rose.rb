@@ -1,7 +1,7 @@
 class GildedRose
 
   QUALITY_REDUCTION = 1
-  
+
   def initialize(items)
     @items = items
   end
@@ -23,13 +23,13 @@ class GildedRose
 
   def calculate_non_exceptions_quality(item)
     if in_date?(item)
-      if !negative_quality?(item, -1)
-        update_quality2(item, -1)
+      if !negative_quality?(item, -QUALITY_REDUCTION)
+        update_quality2(item, -QUALITY_REDUCTION)
       else
         set_quality(item, 0)
       end
     else
-      update_quality2(item, -2)
+      update_quality2(item, -(QUALITY_REDUCTION*2))
     end
   end
 
@@ -56,8 +56,8 @@ class GildedRose
   end
 
   def calculate_brie_quality(item)
-    if !over_quality?(item, 1)
-      update_quality2(item, 1)
+    if !over_quality?(item, QUALITY_REDUCTION)
+      update_quality2(item, QUALITY_REDUCTION)
     else
       set_quality(item, 50)
     end

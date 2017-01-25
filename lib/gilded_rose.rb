@@ -6,54 +6,49 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.name != "Sulfuras, Hand of Ragnaros"
 
-          #Normal items
-          if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if in_date?(item)
-
-              if !negative_quality?(item, -1)
-                update_quality2(item, -1)
-              else
-                set_quality(item, 0)
-              end
-
-            else
-              update_quality2(item, -2)
-            end
-
-          else
-
-            #Brie
-            if item.name == "Aged Brie"
-              calculate_brie(item)
-            end
-
-            #Backstage
-            if item.name == "Backstage passes to a TAFKAL80ETC concert"
-              calculate_backstage_passes(item)
-            end
-
-          end
+      if item.name == "Sulfuras, Hand of Ragnaros"
+        break
+      elsif item.name == "Aged Brie"
+        calculate_brie_quality(item)
+      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
+        calculate_backstage_passes_quality(item)
+      elsif item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert"
+        calculate_non_exceptions_quality(item)
+      end
 
       update_sell_in(item)
 
-      end
     end
-
 
   end
 
-  def calculate_backstage_passes(item)
+  def calculate_non_exceptions_quality(item)
+    if in_date?(item)
+      if !negative_quality?(item, -1)
+        update_quality2(item, -1)
+      else
+        set_quality(item, 0)
+      end
+    else
+      update_quality2(item, -2)
+    end
+  end
+
+  def calculate_backstage_passes_quality(item)
     if in_date?(item)
       if item.sell_in < 6
         if !over_quality?(item, 3)
           update_quality2(item, 3)
+        else
+          set_quality(item, 50)
         end
 
       else item.sell_in < 11
         if !over_quality?(item, 2)
           update_quality2(item, 2)
+        else
+          set_quality(item, 50)
         end
       end
 
@@ -62,7 +57,7 @@ class GildedRose
     end
   end
 
-  def calculate_brie(item)
+  def calculate_brie_quality(item)
     if !over_quality?(item, 1)
       update_quality2(item, 1)
     else

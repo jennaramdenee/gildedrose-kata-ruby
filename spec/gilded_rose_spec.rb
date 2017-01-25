@@ -87,6 +87,14 @@ describe GildedRose do
       expect(item.sell_in).to eq 2
     end
 
+
+    it "reduces sell_in date by 1 for a product that is still in date" do
+      item = Item.new("foo", 5, 5)
+      rose = GildedRose.new(item)
+      rose.update_sell_in(item)
+      expect(item.sell_in).to eq 4
+    end
+
   end
 
   describe "#set_quality" do
@@ -100,48 +108,73 @@ describe GildedRose do
 
   end
 
-  describe "#calculate_brie" do
+  describe "#calculate_brie_quality" do
 
     it "increases quality at the end of the day" do
       item = Item.new("Aged Brie", 1, 33)
       rose = GildedRose.new(item)
-      rose.calculate_brie(item)
+      rose.calculate_brie_quality(item)
       expect(item.quality).to eq 34
     end
 
     it "never increases quality over 50" do
       item = Item.new("Aged Brie", 1, 50)
       rose = GildedRose.new(item)
-      rose.calculate_brie(item)
+      rose.calculate_brie_quality(item)
       expect(item.quality).to eq 50
     end
 
   end
 
-  describe "#calculate_backstage_passes" do
+  describe "#calculate_backstage_passes_quality" do
 
     it "increases quality by 2 if there are 9 days until sell_in date" do
       item = Item.new("Backstage passes to a TAFKAL80ETC concert", 9, 40)
       rose = GildedRose.new(item)
-      rose.calculate_backstage_passes(item)
+      rose.calculate_backstage_passes_quality(item)
       expect(item.quality).to eq 42
     end
 
     it "increases quality by 3 if there are 4 days until sell_in date" do
       item = Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 30)
       rose = GildedRose.new(item)
-      rose.calculate_backstage_passes(item)
+      rose.calculate_backstage_passes_quality(item)
       expect(item.quality).to eq 33
     end
 
     it "sets quality to 0 after the concert" do
       item = Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 30)
       rose = GildedRose.new(item)
-      rose.calculate_backstage_passes(item)
+      rose.calculate_backstage_passes_quality(item)
       expect(item.quality).to eq 0
     end
 
+    it "never increases quality over 50" do
+      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 49)
+      rose = GildedRose.new(item)
+      rose.calculate_backstage_passes_quality(item)
+      expect(item.quality).to eq 50
+    end
 
   end
+
+  describe "#calculate_non_exceptions_quality" do
+
+    it "reduces quality by 1 for a product that is still in date" do
+      item = Item.new("foo", 5, 5)
+      rose = GildedRose.new(item)
+      rose.calculate_non_exceptions_quality(item)
+      expect(item.quality).to eq 4
+    end
+
+    it "reduces quality by 2 for a product that is out of date" do
+      item = Item.new("foo", 0, 5)
+      items = [item]
+      GildedRose.new(items).update_quality()
+      expect(item.quality).to eq 3
+    end
+
+  end
+
 
 end

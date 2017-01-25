@@ -80,11 +80,18 @@ describe GildedRose do
       expect(item.quality).to eq 2
     end
 
-    it "never reduces quality below 0" do
+    it "never reduces quality below zero" do
       item = Item.new("foo", 1, 0)
       rose = GildedRose.new(item)
       rose.update_quality2(item, -3)
       expect(item.quality).to eq 0
+    end
+
+    it "never increases quality above fifty" do
+      item = Item.new("foo", 1, 50)
+      rose = GildedRose.new(item)
+      rose.update_quality2(item, 5)
+      expect(item.quality).to eq 50
     end
 
   end
@@ -144,7 +151,7 @@ describe GildedRose do
       expect(item.quality).to eq 34
     end
 
-    it "never increases quality over 50" do
+    it "never increases quality over fifty" do
       item = Item.new("Aged Brie", 1, 50)
       rose = GildedRose.new(item)
       rose.calculate_brie_quality(item)
@@ -176,7 +183,7 @@ describe GildedRose do
       expect(item.quality).to eq 0
     end
 
-    it "never increases quality over 50" do
+    it "never increases quality over fifty" do
       item = Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 49)
       rose = GildedRose.new(item)
       rose.calculate_backstage_passes_quality(item)

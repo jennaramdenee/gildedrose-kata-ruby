@@ -8,7 +8,9 @@ describe GildedRose do
       expect(GildedRose::QUALITY_REDUCTION).to eq 1
     end
 
-
+    it "initializes with a constant value by which sell_in is reduced" do
+      expect(GildedRose::SELL_IN_REDUCTION).to eq 1
+    end
 
   end
 

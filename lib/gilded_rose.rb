@@ -1,6 +1,7 @@
 class GildedRose
 
   QUALITY_REDUCTION = 1
+  SELL_IN_REDUCTION = 1
 
   def initialize(items)
     @items = items
@@ -80,7 +81,7 @@ class GildedRose
   end
 
   def update_sell_in(item)
-    item.sell_in -= 1
+    item.sell_in -= SELL_IN_REDUCTION
   end
 
   def set_quality(item, value)

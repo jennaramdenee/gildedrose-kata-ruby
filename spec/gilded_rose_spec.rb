@@ -10,6 +10,10 @@ describe GildedRose do
       expect(items[0].name).to eq "foo"
     end
 
+  end
+
+  describe "#negative_quality?" do
+
     it "returns true when quality will be reduced below zero" do
       item = Item.new("foo", 0, 0)
       rose = GildedRose.new(item)
@@ -22,6 +26,10 @@ describe GildedRose do
       expect(rose.negative_quality?(item, -1)).to eq false
     end
 
+  end
+
+  describe "#over_quality?" do
+
     it "returns true when quality will be increased above fifty" do
       item = Item.new("foo", 0, 0)
       rose = GildedRose.new(item)
@@ -33,6 +41,10 @@ describe GildedRose do
       rose = GildedRose.new(item)
       expect(rose.over_quality?(item, 50)).to eq true
     end
+
+  end
+
+  describe "#update_quality2" do
 
     it "can amend quality for an item by a given positive value" do
       item = Item.new("foo", 0, 1)
@@ -48,8 +60,12 @@ describe GildedRose do
       expect(item.quality).to eq 2
     end
 
+  end
+
+  describe "#in_date?" do
+
     it "can check whether product is still in date" do
-      item = Item.new("foo", 0, 0)
+      item = Item.new("foo", 1, 0)
       rose = GildedRose.new(item)
       expect(rose.in_date?(item)).to eq true
     end
@@ -60,11 +76,26 @@ describe GildedRose do
       expect(rose.in_date?(item)).to eq false
     end
 
+  end
+
+  describe "#update_sell_in" do
+
     it "can amend sell by date for an item" do
       item = Item.new("foo", 3, 0)
       rose = GildedRose.new(item)
       rose.update_sell_in(item)
       expect(item.sell_in).to eq 2
+    end
+
+  end
+
+  describe "#set_quality" do
+
+    it "can set item quality to a defined value" do
+      item = Item.new("foo", 0, 0)
+      rose = GildedRose.new(item)
+      rose.set_quality(item, 6)
+      expect(item.quality).to eq 6
     end
 
   end

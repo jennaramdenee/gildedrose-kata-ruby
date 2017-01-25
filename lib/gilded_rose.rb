@@ -50,7 +50,14 @@ class GildedRose
         end
       end
     end
+
+
   end
+
+  def negative_quality?(item, value)
+    item.quality - value < 0
+  end
+
 end
 
 class Item

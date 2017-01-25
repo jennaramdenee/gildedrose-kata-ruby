@@ -39,8 +39,20 @@ describe GildedRose do
   end
 
   describe "Sulfuras" do
-    
 
+    it "never reduces the quality" do
+      item = Item.new("Sulfuras, Hand of Ragnaros", 0, 80)
+      items = [item]
+      GildedRose.new(items).update_quality()
+      expect(item.quality).to eq 80
+    end
+
+    it "never reduces the sell_in date" do
+      item = Item.new("Sulfuras, Hand of Ragnaros", 0, 80)
+      items = [item]
+      GildedRose.new(items).update_quality()
+      expect(item.sell_in).to eq 0
+    end
 
   end
 

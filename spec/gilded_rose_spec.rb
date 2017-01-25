@@ -183,13 +183,6 @@ describe GildedRose do
       expect(item.quality).to eq 0
     end
 
-    it "never increases quality over fifty" do
-      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 49)
-      rose = GildedRose.new(item)
-      rose.calculate_backstage_passes_quality(item)
-      expect(item.quality).to eq 50
-    end
-
   end
 
   describe "#calculate_non_exceptions_quality" do

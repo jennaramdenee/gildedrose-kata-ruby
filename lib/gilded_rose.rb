@@ -39,20 +39,10 @@ class GildedRose
   def calculate_backstage_passes_quality(item)
     if in_date?(item)
       if item.sell_in < 6
-        if !over_quality?(item, 3)
-          update_quality2(item, 3)
-        else
-          set_quality(item, MAX_QUALITY)
-        end
-
+        update_quality2(item, 3)
       else item.sell_in < 11
-        if !over_quality?(item, 2)
-          update_quality2(item, 2)
-        else
-          set_quality(item, MAX_QUALITY)
-        end
+        update_quality2(item, 2)
       end
-
     else
       set_quality(item, MIN_QUALITY)
     end

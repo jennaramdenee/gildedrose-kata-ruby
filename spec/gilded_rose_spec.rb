@@ -35,6 +35,7 @@ describe GildedRose do
       items = [item]
       rose = GildedRose.new(items)
       expect(rose).to receive(:calculate_brie_quality).with(item)
+      expect(rose).not_to receive(:calculate_backstage_passes_quality).with(item)
       rose.calculate_quality
     end
 
@@ -43,6 +44,7 @@ describe GildedRose do
       items = [item]
       rose = GildedRose.new(items)
       expect(rose).to receive(:calculate_backstage_passes_quality).with(item)
+      expect(rose).not_to receive(:calculate_conjured_quality).with(item)
       rose.calculate_quality
     end
 
@@ -51,6 +53,7 @@ describe GildedRose do
       items = [item]
       rose = GildedRose.new(items)
       expect(rose).to receive(:calculate_conjured_quality).with(item)
+      expect(rose).not_to receive(:calculate_non_exceptions_quality).with(item)
       rose.calculate_quality
     end
 
@@ -59,6 +62,7 @@ describe GildedRose do
       items = [item]
       rose = GildedRose.new(items)
       expect(rose).to receive(:calculate_non_exceptions_quality).with(item)
+      expect(rose).not_to receive(:calculate_brie_quality).with(item)
       rose.calculate_quality
     end
 

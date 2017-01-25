@@ -30,13 +30,6 @@ describe GildedRose do
       expect(items[0].name).to eq "foo"
     end
 
-    it "reduces sell_in date for 1 for a product that is out of date" do
-      item = Item.new("foo", 0, 5)
-      items = [item]
-      GildedRose.new(items).calculate_quality()
-      expect(item.sell_in).to eq -1
-    end
-
     describe "Sulfuras" do
 
       it "never reduces the quality" do
@@ -146,12 +139,18 @@ describe GildedRose do
       expect(item.sell_in).to eq 2
     end
 
-
     it "reduces sell_in date by 1 for a product that is still in date" do
       item = Item.new("foo", 5, 5)
       rose = GildedRose.new(item)
       rose.update_sell_in(item)
       expect(item.sell_in).to eq 4
+    end
+
+    it "reduces sell_in date by 1 for a product that is out of date" do
+      item = Item.new("foo", 0, 5)
+      rose = GildedRose.new(item)
+      rose.update_sell_in(item)
+      expect(item.sell_in).to eq -1
     end
 
   end
@@ -221,5 +220,22 @@ describe GildedRose do
 
   end
 
+  describe "#calculate_conjured_quality" do
+
+    it "reduces quality by 2 for a product that is still in date" do
+      item = Item.new("Conjured", 5, 5)
+      rose = GildedRose.new(item)
+      rose.calculate_conjured_quality(item)
+      expect(item.quality).to eq 3
+    end
+
+    it "reduces quality by 4 for a product that is out of date" do
+      item = Item.new("foo", 0, 5)
+      rose = GildedRose.new(item)
+      rose.calculate_conjured_quality(item)
+      expect(item.quality).to eq 1
+    end
+
+  end
 
 end

@@ -17,6 +17,8 @@ class GildedRose
         calculate_brie_quality(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         calculate_backstage_passes_quality(item)
+      elsif item.name == "Conjured"
+        calculate_conjured_quality
       else
         calculate_non_exceptions_quality(item)
       end
@@ -46,6 +48,14 @@ class GildedRose
 
   def calculate_brie_quality(item)
     update_quality(item, QUALITY_REDUCTION)
+  end
+
+  def calculate_conjured_quality(item)
+    if in_date?(item)
+      update_quality(item, -(QUALITY_REDUCTION*2))
+    else
+      update_quality(item, -(QUALITY_REDUCTION*4))
+    end
   end
 
   def negative_quality?(item, value)

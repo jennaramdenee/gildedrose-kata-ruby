@@ -54,6 +54,14 @@ describe GildedRose do
       rose.calculate_quality
     end
 
+    it "calls calculate_non_exceptions_quality method if 'Tomato'" do
+      item = Item.new("Tomato", 6, 0)
+      items = [item]
+      rose = GildedRose.new(items)
+      expect(rose).to receive(:calculate_non_exceptions_quality).with(item)
+      rose.calculate_quality
+    end
+
     describe "Sulfuras" do
 
       it "never reduces the quality" do

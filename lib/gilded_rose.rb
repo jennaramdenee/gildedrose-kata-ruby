@@ -19,7 +19,6 @@ class GildedRose
           end
 
         else
-
             #All about backstage
             if item.name == "Backstage passes to a TAFKAL80ETC concert"
               if item.sell_in < 11
@@ -37,7 +36,6 @@ class GildedRose
               end
 
             end
-
         end
       else
         update_quality2(item, -2)

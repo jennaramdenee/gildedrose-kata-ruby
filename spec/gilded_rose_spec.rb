@@ -151,13 +151,6 @@ describe GildedRose do
       expect(item.quality).to eq 34
     end
 
-    it "never increases quality over fifty" do
-      item = Item.new("Aged Brie", 1, 50)
-      rose = GildedRose.new(item)
-      rose.calculate_brie_quality(item)
-      expect(item.quality).to eq 50
-    end
-
   end
 
   describe "#calculate_backstage_passes_quality" do

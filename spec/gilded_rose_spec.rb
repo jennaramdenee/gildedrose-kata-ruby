@@ -66,6 +66,14 @@ describe GildedRose do
       rose.calculate_quality
     end
 
+    it "calls update_sell_in method" do
+      item = Item.new("Tomato", 6, 0)
+      items = [item]
+      rose = GildedRose.new(items)
+      expect(rose).to receive(:update_sell_in).with(item)
+      rose.calculate_quality
+    end
+
     describe "Sulfuras" do
 
       it "never reduces the quality" do

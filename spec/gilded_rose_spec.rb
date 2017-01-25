@@ -2,6 +2,16 @@ require File.join(File.dirname(__FILE__), '../lib/gilded_rose')
 
 describe GildedRose do
 
+  describe "#initialize" do
+
+    it "initializes with a constant value by which quality is reduced" do
+      expect(GildedRose::QUALITY_REDUCTION).to eq 1
+    end
+
+
+
+  end
+
   describe "#update_quality" do
 
     it "does not change the name" do

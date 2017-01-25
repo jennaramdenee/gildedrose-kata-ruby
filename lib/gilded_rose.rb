@@ -1,5 +1,7 @@
 class GildedRose
 
+  QUALITY_REDUCTION = 1
+  
   def initialize(items)
     @items = items
   end
@@ -12,7 +14,7 @@ class GildedRose
         calculate_brie_quality(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         calculate_backstage_passes_quality(item)
-      else 
+      else
         calculate_non_exceptions_quality(item)
       end
       update_sell_in(item)

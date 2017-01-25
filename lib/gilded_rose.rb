@@ -9,6 +9,8 @@ class GildedRose
       if item.name != "Sulfuras, Hand of Ragnaros"
 
         if in_date?(item)
+
+          #Normal items
           if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
 
             if !negative_quality?(item, -1)
@@ -19,28 +21,30 @@ class GildedRose
 
           else
 
-            # Brie
-            if !over_quality?(item, 1)
-              update_quality2(item, 1)
-            else
-              set_quality(item, 50)
+            #Brie
+            if item.name == "Aged Brie"
+              if !over_quality?(item, 1)
+                update_quality2(item, 1)
+              else
+                set_quality(item, 50)
+              end
             end
 
             #Backstage
             if item.name == "Backstage passes to a TAFKAL80ETC concert"
-              if item.sell_in < 11
-
-                if !over_quality?(item)
-                  update_quality2(item, 1)
-                end
-
-              end
 
               if item.sell_in < 6
-                if item.quality < 50
-                  update_quality2(item, 1)
+                if !over_quality?(item, 3)
+                  update_quality2(item, 3)
                 end
+
+              elsif item.sell_in < 11
+                if !over_quality?(item, 2)
+                  update_quality2(item, 2)
+                end
+
               end
+
 
             end
 
@@ -51,18 +55,6 @@ class GildedRose
         update_sell_in(item)
 
       end
-      #Exceptions
-      #
-      #
-      #   # if item.name != "Aged Brie"
-      #   #   set_quality(item, 0)
-      #   # else
-      #     #All about brie
-      #     if item.quality < 50
-      #       update_quality2(item, -1)
-      #     end
-      #   # end
-      # end
     end
 
 

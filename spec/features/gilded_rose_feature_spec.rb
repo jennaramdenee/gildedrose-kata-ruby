@@ -66,49 +66,5 @@ describe GildedRose do
     end
 
   end
-  # 
-  # describe "Aged Brie" do
-  #
-  #   it "increases quality at the end of the day" do
-  #     item = Item.new("Aged Brie", 1, 33)
-  #     items = [item]
-  #     GildedRose.new(items).update_quality()
-  #     expect(item.quality).to eq 34
-  #   end
-  #
-  #   it "never increases quality over 50" do
-  #     item = Item.new("Aged Brie", 1, 50)
-  #     items = [item]
-  #     GildedRose.new(items).update_quality()
-  #     expect(item.quality).to eq 50
-  #   end
-  #
-  # end
-
-  describe "Backstage passes" do
-
-    it "increases quality by 2 if there are 9 days until sell_in date" do
-      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 9, 40)
-      items = [item]
-      GildedRose.new(items).update_quality()
-      expect(item.quality).to eq 42
-    end
-
-    it "increases quality by 3 if there are 4 days until sell_in date" do
-      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 30)
-      items = [item]
-      GildedRose.new(items).update_quality()
-      expect(item.quality).to eq 33
-    end
-
-    it "sets quality to 0 after the concert" do
-      item = Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 30)
-      items = [item]
-      GildedRose.new(items).update_quality()
-      expect(item.quality).to eq 0
-    end
-
-
-  end
 
 end

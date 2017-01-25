@@ -64,33 +64,33 @@ describe GildedRose do
 
   end
 
-  describe "#update_quality2" do
+  describe "#update_quality" do
 
     it "can amend quality for an item by a given positive value" do
       item = Item.new("foo", 0, 1)
       rose = GildedRose.new(item)
-      rose.update_quality2(item, 4)
+      rose.update_quality(item, 4)
       expect(item.quality).to eq 5
     end
 
     it "can amend quality for an item by a given negative value" do
       item = Item.new("foo", 0, 5)
       rose = GildedRose.new(item)
-      rose.update_quality2(item, -3)
+      rose.update_quality(item, -3)
       expect(item.quality).to eq 2
     end
 
     it "never reduces quality below zero" do
       item = Item.new("foo", 1, 0)
       rose = GildedRose.new(item)
-      rose.update_quality2(item, -3)
+      rose.update_quality(item, -3)
       expect(item.quality).to eq 0
     end
 
     it "never increases quality above fifty" do
       item = Item.new("foo", 1, 50)
       rose = GildedRose.new(item)
-      rose.update_quality2(item, 5)
+      rose.update_quality(item, 5)
       expect(item.quality).to eq 50
     end
 

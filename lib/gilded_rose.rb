@@ -26,18 +26,18 @@ class GildedRose
 
   def calculate_non_exceptions_quality(item)
     if in_date?(item)
-      update_quality2(item, -QUALITY_REDUCTION)
+      update_quality(item, -QUALITY_REDUCTION)
     else
-      update_quality2(item, -(QUALITY_REDUCTION*2))
+      update_quality(item, -(QUALITY_REDUCTION*2))
     end
   end
 
   def calculate_backstage_passes_quality(item)
     if in_date?(item)
       if item.sell_in < 6
-        update_quality2(item, 3)
+        update_quality(item, 3)
       else item.sell_in < 11
-        update_quality2(item, 2)
+        update_quality(item, 2)
       end
     else
       set_quality(item, MIN_QUALITY)
@@ -45,7 +45,7 @@ class GildedRose
   end
 
   def calculate_brie_quality(item)
-    update_quality2(item, QUALITY_REDUCTION)
+    update_quality(item, QUALITY_REDUCTION)
   end
 
   def negative_quality?(item, value)
@@ -56,7 +56,7 @@ class GildedRose
     item.quality + value > MAX_QUALITY
   end
 
-  def update_quality2(item, value)
+  def update_quality(item, value)
     if value > 0
       !over_quality?(item, value) ? item.quality += value : set_quality(item, MAX_QUALITY)
     else

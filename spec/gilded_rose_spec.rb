@@ -12,6 +12,10 @@ describe GildedRose do
       expect(GildedRose::SELL_IN_REDUCTION).to eq 1
     end
 
+    it "initializes with a constant value which quality cannot exceed" do
+      expect(GildedRose::MAX_QUALITY).to eq 50
+    end
+
   end
 
   describe "#update_quality" do

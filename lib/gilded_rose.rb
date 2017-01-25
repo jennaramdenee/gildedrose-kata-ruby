@@ -26,11 +26,7 @@ class GildedRose
 
   def calculate_non_exceptions_quality(item)
     if in_date?(item)
-      if !negative_quality?(item, -QUALITY_REDUCTION)
-        update_quality2(item, -QUALITY_REDUCTION)
-      else
-        set_quality(item, MIN_QUALITY)
-      end
+      update_quality2(item, -QUALITY_REDUCTION)
     else
       update_quality2(item, -(QUALITY_REDUCTION*2))
     end

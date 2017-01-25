@@ -132,13 +132,6 @@ describe GildedRose do
 
   describe "#update_sell_in" do
 
-    it "can amend sell by date for an item" do
-      item = Item.new("foo", 3, 0)
-      rose = GildedRose.new(item)
-      rose.update_sell_in(item)
-      expect(item.sell_in).to eq 2
-    end
-
     it "reduces sell_in date by 1 for a product that is still in date" do
       item = Item.new("foo", 5, 5)
       rose = GildedRose.new(item)

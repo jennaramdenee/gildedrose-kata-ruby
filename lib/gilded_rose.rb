@@ -12,32 +12,38 @@ class GildedRose
           if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
 
             if !negative_quality?(item, -1)
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                update_quality2(item, -1)
-              end
-
+              update_quality2(item, -1)
             else
               set_quality(item, 0)
             end
 
           else
-              #All about backstage
-              if item.name == "Backstage passes to a TAFKAL80ETC concert"
-                if item.sell_in < 11
 
-                  if !over_quality?(item)
-                    update_quality2(item, 1)
-                  end
+            # Brie
+            if !over_quality?(item, 1)
+              update_quality2(item, 1)
+            else
+              set_quality(item, 50)
+            end
 
-                end
+            #Backstage
+            if item.name == "Backstage passes to a TAFKAL80ETC concert"
+              if item.sell_in < 11
 
-                if item.sell_in < 6
-                  if item.quality < 50
-                    update_quality2(item, 1)
-                  end
+                if !over_quality?(item)
+                  update_quality2(item, 1)
                 end
 
               end
+
+              if item.sell_in < 6
+                if item.quality < 50
+                  update_quality2(item, 1)
+                end
+              end
+
+            end
+
           end
         else
           update_quality2(item, -2)

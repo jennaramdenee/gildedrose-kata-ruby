@@ -30,6 +30,31 @@ describe GildedRose do
       expect(items[0].name).to eq "foo"
     end
 
+    it "reduces sell_in date for 1 for a product that is out of date" do
+      item = Item.new("foo", 0, 5)
+      items = [item]
+      GildedRose.new(items).calculate_quality()
+      expect(item.sell_in).to eq -1
+    end
+
+    describe "Sulfuras" do
+
+      it "never reduces the quality" do
+        item = Item.new("Sulfuras, Hand of Ragnaros", 0, 80)
+        items = [item]
+        GildedRose.new(items).calculate_quality()
+        expect(item.quality).to eq 80
+      end
+
+      it "never reduces the sell_in date" do
+        item = Item.new("Sulfuras, Hand of Ragnaros", 0, 80)
+        items = [item]
+        GildedRose.new(items).calculate_quality()
+        expect(item.sell_in).to eq 0
+      end
+
+    end
+
   end
 
   describe "#negative_quality?" do

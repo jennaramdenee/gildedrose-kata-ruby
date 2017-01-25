@@ -8,56 +8,63 @@ class GildedRose
     @items.each do |item|
       if item.name != "Sulfuras, Hand of Ragnaros"
 
-        if in_date?(item)
-
           #Normal items
           if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
+            if in_date?(item)
 
-            if !negative_quality?(item, -1)
-              update_quality2(item, -1)
+              if !negative_quality?(item, -1)
+                update_quality2(item, -1)
+              else
+                set_quality(item, 0)
+              end
+
             else
-              set_quality(item, 0)
+              update_quality2(item, -2)
             end
 
           else
 
             #Brie
             if item.name == "Aged Brie"
-              if !over_quality?(item, 1)
-                update_quality2(item, 1)
-              else
-                set_quality(item, 50)
-              end
+              calculate_brie(item)
             end
 
             #Backstage
             if item.name == "Backstage passes to a TAFKAL80ETC concert"
 
-              if item.sell_in < 6
-                if !over_quality?(item, 3)
-                  update_quality2(item, 3)
+              if in_date?(item)
+                if item.sell_in < 6
+                  if !over_quality?(item, 3)
+                    update_quality2(item, 3)
+                  end
+
+                else item.sell_in < 11
+                  if !over_quality?(item, 2)
+                    update_quality2(item, 2)
+                  end
                 end
 
-              elsif item.sell_in < 11
-                if !over_quality?(item, 2)
-                  update_quality2(item, 2)
-                end
-
+              else
+                set_quality(item, 0)
               end
 
-
             end
-
           end
-        else
-          update_quality2(item, -2)
-        end
-        update_sell_in(item)
+
+      update_sell_in(item)
 
       end
     end
 
 
+  end
+
+  def calculate_brie(item)
+    if !over_quality?(item, 1)
+      update_quality2(item, 1)
+    else
+      set_quality(item, 50)
+    end
   end
 
   def negative_quality?(item, value)

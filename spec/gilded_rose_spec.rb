@@ -100,4 +100,22 @@ describe GildedRose do
 
   end
 
+  describe "#calculate_brie" do
+
+    it "increases quality at the end of the day" do
+      item = Item.new("Aged Brie", 1, 33)
+      rose = GildedRose.new(item)
+      rose.calculate_brie(item)
+      expect(item.quality).to eq 34
+    end
+
+    it "never increases quality over 50" do
+      item = Item.new("Aged Brie", 1, 50)
+      rose = GildedRose.new(item)
+      rose.calculate_brie(item)
+      expect(item.quality).to eq 50
+    end
+
+  end
+
 end
